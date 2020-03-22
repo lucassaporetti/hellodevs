@@ -21,3 +21,5 @@ Today we:
 	* Downloades and installed Notepad++
 	* Created my .bash_profile to customize my bash 
 	* Configured some ambiency variables and my python's apps
+	* Created a phonebook using Python 3
+  
