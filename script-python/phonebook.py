@@ -63,15 +63,15 @@ while op != '0':
             print (f'Contact {name} not found')
     elif op == '4':
         print (CONTACTS)
+    elif op == '5' :
+        with open (PHONEBOOK, 'w') as f_phonebook : 
+            f_phonebook.write (str (CONTACTS))
+            print(f'{len(CONTACTS)} contacts saved !')
     elif op == '0':
         sys.exit (0)
     else : 
         print ('# Invalid option ' + op)
 
-    if op == '1' or op == '2' : 
-        with open (PHONEBOOK, 'w') as f_phonebook : 
-            f_phonebook.write (str (CONTACTS))
-            print(f'{len(CONTACTS)} contacts saved !')
 
     input ('\n\nPress enter to continue\n')
     os.system ('cls')
