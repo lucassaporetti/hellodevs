@@ -9,11 +9,12 @@ PROGRAM = os.path.basename(__file__).upper()
 MAIN_MENU = f"""
 {PROGRAM} LUCAS PERSONAL CONTACTS
 
-(1) ADD NAME
-(2) REMOVE NAME
-(3) EDIT NAME
-(4) LIST NAMES
-(5) EXIT
+(1) ADD
+(2) REMOVE
+(3) EDIT
+(4) LIST
+(5) SAVE
+(0) EXIT
 """
 
 PHONEBOOK = 'phonebook.txt'
@@ -26,15 +27,16 @@ if os.path.exists (PHONEBOOK) :
         CONTACTS = ast.literal_eval(data)
         print(f'{len(CONTACTS)} contacts loaded !')
 
-while op != '5':
+while op != '0':
 
     os.system ('cls')
-    new_contact = {"name": None, "address": None, "phone": None}
+    new_contact = {"name": None, "age": None, "address": None, "phone": None}
     print (MAIN_MENU)
     op = input ('Your Option$ ')
 
     if op == '1':
         new_contact['name'] = input ('What\'s your name? ')
+        new_contact['age'] = input ('What\'s your age? ')
         new_contact['address'] = input ('What\'s your address? ')
         new_contact['phone'] = input ('What\'s your phone? ')
         CONTACTS.append(new_contact.copy())
@@ -53,6 +55,7 @@ while op != '5':
         if len (found) > 0 : 
             new_contact = found[0]
             new_contact['name'] = input ('New name? ')
+            new_contact['age'] = input ('New age? ')
             new_contact['address'] = input ('New address? ')
             new_contact['phone'] = input ('New phone? ')
             print ('Contact updated ' + str(new_contact))
@@ -60,7 +63,7 @@ while op != '5':
             print (f'Contact {name} not found')
     elif op == '4':
         print (CONTACTS)
-    elif op == '5':
+    elif op == '0':
         sys.exit (0)
     else : 
         print ('# Invalid option ' + op)
