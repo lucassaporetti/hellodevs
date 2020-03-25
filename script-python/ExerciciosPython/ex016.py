@@ -1,4 +1,4 @@
-from math import sqrt, ceil
-num = int(input('Insira um número: '))
-raiz = sqrt(num)
-print('A raiz de {} é igual a {}'.format(num, ceil(raiz)))
+from math import trunc
+num = float(input('Digite um número real: '))
+pi = trunc(num)
+print('O número {} tem a parte inteira {}.'.format(num, pi))
