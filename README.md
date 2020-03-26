@@ -39,3 +39,18 @@ Today we:
   
 ## 24/03/2020 log
 
+	* Watched my Python3 course on YouTube
+	* Learned how to randomize itens from a list
+	* Learned how to manipulate strings
+	* Did some exercises about it
+  
+## 25/03/2020 log
+
+	* Watched my Python3 course on YouTube
+	* Learned more about manipulation and analisys of strings
+	* Learned about compound conditional structures and their commands
+	* Did some exercises about it
+  
+## 26/03/2020
+
+	*
