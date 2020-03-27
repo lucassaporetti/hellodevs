@@ -51,6 +51,12 @@ Today we:
 	* Learned about compound conditional structures and their commands
 	* Did some exercises about it
   
-## 26/03/2020
+## 26/03/2020 log
+
+	* Watched my Python3 course on YouTube
+	* Learned and exercised more about conditional strutures and their commands
+	* Learned how to colorize the terminal with ANSI escape sequences pattern
+  
+## 27/03/2020
 
 	*
