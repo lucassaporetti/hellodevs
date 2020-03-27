@@ -1,8 +1,13 @@
-import random
+from random import randint
 import emoji
-question = int(input('Estou pensando em um número de 0 a 5...\n'
-                     'Que número é esse? '))
-randomize = random.randint(0, 5)
+from time import sleep
+print('-=-' * 13)
+print('Vou pensar em um número de 0 a 5...')
+print('-=-' * 13)
+question = int(input('Em que número pensei? '))
+randomize = randint(0, 5)
+print('Processando...')
+sleep(2)
 print('O número que eu pensei foi {}.'.format(randomize))
 if question == randomize:
     print('Parabéns! Você acertou!',
