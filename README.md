@@ -59,4 +59,8 @@ Today we:
   
 ## 27/03/2020
 
+	* I tried to successfully complete my first weekly test
+  
+## 28/03/2020
+
 	*
