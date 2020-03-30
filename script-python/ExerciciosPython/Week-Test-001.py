@@ -21,7 +21,7 @@ while True:
 
     try:
         left_operand = float(input('Left operand [0]:'))
-        operation = (input('Operation [+]: '))
+        operation = (input('Operation [+]: ')).strip()
         if operation not in allowed_ops:
             print('{}Invalid operation, please try again!{}'.format(color['red'], color['clear']))
             input('\n\nPress enter to continue\n')
@@ -49,7 +49,7 @@ while True:
         result = left_operand * right_operand
         print('= {}'.format(result))
     elif operation == '@':
-        result = left_operand ** (1 / (right_operand))
+        result = left_operand ** (1 / right_operand)
         print('= {:.2f}'.format(result))
     elif operation == '^':
         result = pow(left_operand, right_operand)

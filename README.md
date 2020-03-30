@@ -18,7 +18,7 @@ Today we:
 ## 21/03/2020 log
 
 	* Downloaded and installed Python 2 and 3
-	* Downloades and installed Notepad++
+	* Downloaded and installed Notepad++
 	* Created my .bash_profile to customize my bash 
 	* Configured some ambiency variables and my python's apps
 	* Created a phonebook using Python 3
@@ -63,4 +63,14 @@ Today we:
   
 ## 28/03/2020
 
-	*
+	* Dead day... Recovering energies
+
+## 29/03/2020
+
+	* Watched my Python3 course on YouTube
+	* Learned and exercised more about conditional structures
+	* Learned about repetition structures and the 'for' command
+
+## 30/03/2020
+
+	* 
