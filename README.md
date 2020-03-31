@@ -73,4 +73,9 @@ Today we:
 
 ## 30/03/2020
 
-	* 
+	* Wacthed my Python3 course on Youtube
+	* Learned and exercise a lot of repetition structures like 'for' and 'while' commands
+
+## 31/03/2020
+
+	*
