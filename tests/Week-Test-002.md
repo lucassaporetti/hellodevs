@@ -26,7 +26,7 @@ There must have a menu like the following:
 
 ##### Main Menu
 
-```bash
+```
 @ Lucas Bookstore v0.9.0
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ** Changes are automatically saved
@@ -34,17 +34,16 @@ There must have a menu like the following:
 [0] Exit.
 [1] Add Book.
 [2] Remove Book.
-[3] Edit Book.
-[4] List Books.
-[5] Search Book.
+[3] List Books.
+[4] Search Book.
 
-[Add] :
+$ <op>
 ```
 
 ##### Add Book
 
-```bash
-    Index: <Unique index on the bookshelf>
+```
+    Index: <Unique index on the bookshelf up to 4-digits>
 Book Name: <up to 30 letters or numbers>
    Author: <up to 60 letters or numbers>
 Published: <publication date with the format `dd/mm/YYYY'>
@@ -53,47 +52,51 @@ Published: <publication date with the format `dd/mm/YYYY'>
 
 ##### Remove Book
 
-```bash
-Index: <Unique index on the bookshelf>
+```
+Book index: <Unique index on the bookshelf up to 4-digits>
 
 Confirm removal of book <Index> (y/[n])?
 ```
 
-##### Edit Book
-
-The current values of the Book must be displayed.
-
-```bash
-    Index: <Unique index on the bookshelf>
-Book Name: <up to 30 letters or numbers>
-   Author: <up to 60 letters or numbers>
-Published: <publication date with the format `dd/mm/YYYY'>
-    Pages: <up to 4-digits numbers>
-```
-
 ##### List Books
 
-```bash
-Listing all <number_of_books> available:
+```
+Listing all (<number_of_books>) available book(s):
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-001 <TAB> { index: <book_index>, name: <book_name>, author: <author>, published: <date>, pages: <num_of_pages> }
-002 <TAB> { index: <book_index>, name: <book_name>, author: <author>, published: <date>, pages: <num_of_pages> }
+001 <TAB><TAB> { index: <book_index>, name: <book_name>, author: <author>, published: <date>, pages: <num_of_pages> }
+002 <TAB><TAB> { index: <book_index>, name: <book_name>, author: <author>, published: <date>, pages: <num_of_pages> }
 ...
 ...
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ```
+
+If there are no books yet stored, the following message should be displayed:
+
+`
+-=- There are no books stored yet -=-
+`
 
 ##### Search Books
 
-This menu item is optional. Thats my challenge for you.
+This menu item is optional. That's my challenge for you.
 
-```bash
-Index: <Unique index on the bookshelf>
+If there are no books that matches the criteria, the following message should be displayed:
+
+```
+Author: <up to 60 letters or numbers>
+
+-=- Did not find any books for that search -=-
+```
+
+Otherwise``
+
+```
+Name or Author: <up to 60 letters or numbers>
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-001 <TAB> { index: <book_index>, name: <book_name>, author: <author>, published: <date>, pages: <num_of_pages> }
-002 <TAB> { index: <book_index>, name: <book_name>, author: <author>, published: <date>, pages: <num_of_pages> }
+001 <TAB><TAB> { index: <book_index>, name: <book_name>, author: <author>, published: <date>, pages: <num_of_pages> }
+002 <TAB><TAB> { index: <book_index>, name: <book_name>, author: <author>, published: <date>, pages: <num_of_pages> }
 ...
 ...
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -102,7 +105,7 @@ Index: <Unique index on the bookshelf>
 ##### PLUS-Extra-Challenge:
 
 1. All Add/Remove/Edit data would be persisted.
-1. After every Add/Remove/Edit the data is saved automatically.
+1. After every time the program exists (0 pressed), the data is saved automatically.
 2. When the program starts, old file data is loaded if the file exists.
 
 #### Non-Functional requirements:
@@ -143,23 +146,23 @@ USAGE = f"""
 Usage: python {APP_NAME}
 """
 
-# Allowed menu options.
-MENU_OPTIONS = ['0', '1', '2', '3', '4', '5']
-
 # The main menu.
-MAIN_MENU = f"""
+MAIN_MENU = f"""\033[1J\033[H
 @ Lucas Bookstore v{'.'.join(VERSION)}
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ** Changes are automatically saved
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-[0] Exit.
-[1] Add Book.
-[2] Remove Book.
-[3] Edit Book.
-[4] List Books.
-[5] Search Book.
+[0] Exit
+[1] Add Book
+[2] Remove Book
+[3] Edit Book
+[4] List Books
+[5] Search Book
 
 [Add]"""
+
+# Allowed menu options.
+MENU_OPTIONS = ['0', '1', '2', '3', '4', '5']
 
 # The file name of the bookstore.
 BOOKSTORE = 'bookstore.dat'
@@ -173,7 +176,7 @@ op = None
 # New book is a dictionary object and must have the following fields:
 #   new_contact = { "index": None, "name": None, "author": None, "published": None, "pages": None }
 
-...Your code goes here...
+# ...Your code goes here...
 
 sys.exit(0)
 ```
