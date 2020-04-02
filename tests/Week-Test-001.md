@@ -25,9 +25,9 @@ Lucas-Calculator v<number>
 ================================
 Operations: + - / * @ ^
 --------------------------------
- Left operand [0]: 
+ Left operand [0]:
     Operation [+]:
-Right operand [0]: 
+Right operand [0]:
 
 = <result>
 ```
@@ -38,5 +38,3 @@ Right operand [0]:
     2. The app should handle pressing letters instead of numbers for operands.
     3. The app should handle invalid operations not in ['+','-','/','*','@','^'].
     4. The app should handle invalid operation like N/0 (division by zero).
-
-
