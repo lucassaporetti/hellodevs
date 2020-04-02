@@ -78,4 +78,14 @@ Today we:
 
 ## 31/03/2020
 
+	* Wathed my Python3 course on YouTube
+	* Exercised a lot of repetiton structures and how to analyse work better with str and int ranges
+
+## 01/04/2020
+
+	* Watched my Python3 course on YouTube
+	* Exercised and learn about 'while true' and their break points
+
+## 02/04/2020
+
 	*
