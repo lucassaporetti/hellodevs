@@ -1,6 +1,4 @@
-pessoas_maior = 0
-homens = 0
-mulher_menor20 = 0
+pessoas_maior = homens = mulher_menor20 = 0
 
 while True:
     print('-' * 20)

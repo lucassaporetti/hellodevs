@@ -2,11 +2,8 @@ print('-' * 20)
 print('  LOJAS SAPORETTI')
 print('-' * 20)
 
-soma_total = 0
-qtd_produtos1000 = 0
+soma_total = qtd_produtos1000 = price_barato = count = 0
 produto_barato = ''
-price_barato = 0
-count = 0
 
 while True:
 
@@ -26,11 +23,7 @@ while True:
     if price > 1000:
         qtd_produtos1000 += 1
 
-    if count == 1:
-        price_barato = price
-        produto_barato = nome_produto
-
-    if price < price_barato:
+    if count == 1 or price < price_barato:
         price_barato = price
         produto_barato = nome_produto
 
@@ -40,7 +33,7 @@ while True:
     if continuar == 'N':
         break
 
-print('------ FIM DO PROGRAMA ------')
+print('{:-^40}'.format(' FIM DO PROGRAMA '))
 print(f'O total da compra foi R${soma_total:.2f}')
 print(f'Temos {qtd_produtos1000} produtos custando mais de R$1000.00')
 print(f'O produto mais barato foi {produto_barato} que custa R${price_barato:.2f}')
