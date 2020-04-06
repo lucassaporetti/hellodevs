@@ -2,7 +2,7 @@ lista_valores = []
 
 while True:
 
-    valor = input('Digite um valor: ')
+    valor = int(input('Digite um valor: '))
 
     if valor in lista_valores:
         print('Valor duplicado! Não vou adicionar!')

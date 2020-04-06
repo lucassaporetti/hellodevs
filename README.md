@@ -88,4 +88,21 @@ Today we:
 
 ## 02/04/2020
 
+	* Watched my Python3 course on YouTube
+	* Learned and exercised about Tuples and Lists
+
+## 03/04/2020
+
+	* Completed successfully my second weekly test.
+
+## 04/04/2020
+
+	* Exercised more about composite lists
+
+## 05/04/2020
+
+	* Battletoads day! ^^
+
+## 06/04/2020
+
 	*
