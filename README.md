@@ -110,14 +110,31 @@ Today we:
   
 ## 07/04/2020
 
-	*Exercised a lot of dictionaries and lists
-	*Learned about functions and 'def' command
+	* Exercised a lot of dictionaries and lists
+	* Learned about functions and 'def' command
 
 ## 08/04/2020
 
-	*Watch my Python3 course on YouTube
-	*Exercised 'def' functions
+	* Watched my Python3 course on YouTube
+	* Exercised 'def' functions
 
 ## 09/04/2020
+
+	* Watched my Python3 course on YouTube
+	* Exercised 'def'
+  
+## 10/04/2020
+
+	* Vanancy
+
+## 11/04/2020
+
+	* Vacancy
+
+## 12/04/2020
+
+	* Vacancy
+
+## 13/04/2020
 
 	*
