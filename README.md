@@ -137,4 +137,8 @@ Today we:
 
 ## 13/04/2020
 
-	*
+	* Finished my first Python 3 course on YouTube with an exercise of functions and txt file manipulation
+  
+## 14/04/2020
+
+	* 

@@ -1,30 +1,17 @@
-# remedios = {'febre': 'paracetamol', 'dor de cabeça': 'dorflex', 'colica': 'ibuprofeno',
-#             'dor de estômago': 'eno', 'corte no dedo': 'bandaid'}
-#
-# sintoma = ''
-#
-# while sintoma != 'E':
-#     sintoma = str(input('O que você está sentindo? ["E" para sair] ')).strip().upper()
-#     for key, value in remedios.items():
-#         if sintoma == key.upper().strip():
-#             print(f'Para {key} você precisa usar {value}.')
-#     if sintoma == 0:
-#         break
-# print('Ok, programa encerrado. Viva com saúde!')
+def helper():
+    from time import sleep
+    while True:
+        print('\033[0;30;42m', '~' * 30, f'\n{"SISTEMA DE AJUDA PyHELP": ^30}\n', '~' * 30)
+        sleep(0.5)
+        function_name = str(input('\033[mFunção ou biblioteca > '))
+        if function_name.strip().upper() == 'FIM':
+            print('\033[0;30;41m', '~' * 20, f'\n{"ATÉ LOGO!": ^20}\n', '~' * 20, )
+            break
+        else:
+            print('\033[0;30;46m', '~' * 40, f'\n{f"Acessando o manual do comando {function_name}": ^40}\n', '~' * 40)
+            sleep(0.5)
+            print('\033[0;7;30m'), help(function_name), print('\033[m', end='')
+            sleep(0.5)
 
-# from time import sleep
-#
-# tempo = int(input('Digite um valor para iniciar o cronômetro: [segundos] '))
-# for t in range(tempo, -1, -1):
-#     sleep(1)
-#
-#     print(f'\b\b{t} ', end='')
-#
-# print('Tanam!!!')
 
-# qtd_biscoitos = int(input('Quantos biscoitos há no pote? '))
-# cont = 0
-# while qtd_biscoitos != 0:
-#     qtd_biscoitos = qtd_biscoitos - 4
-#     cont = cont + 1
-# print(f'Para 4 pessoas, pegando um biscoito a cada hora, o pote ficará vazio em {cont} hora(s).')
+helper()
