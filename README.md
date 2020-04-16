@@ -141,4 +141,12 @@ Today we:
   
 ## 14/04/2020
 
+	* Started a shallow course of POO in Python 3
+
+## 15/04/2020
+
+	* Finished the shallow course of POO in Python 3
+
+## 16/04/2020
+
 	* 

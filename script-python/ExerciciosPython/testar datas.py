@@ -6,3 +6,8 @@ try:
   print(date_obj)
 except ValueError:
   print("Incorrect data format, should be YYYY-MM-DD")
+
+from datetime import date#escopo de importação
+
+ano_atual = date.today().year
+idade = ano_atual - a
