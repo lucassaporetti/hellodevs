@@ -1,4 +1,15 @@
+from car_rental_system import tools
+
+
 class Car:
+    CAR_DB_OUTFILE = 'car_stock.dat'
+
+    CAR_STR_FMT = '{}{}{}'.format(
+        tools.colored_line(tools.colors_dict['blue']),
+        '{}',
+        tools.colored_line(tools.colors_dict['blue'], end='')
+    )
+
     def __init__(self, name, year, category, color, a_c, gear_box, fuel, doors,
                  passengers, suitcase, price, plate, chassis):
         self.name = name
@@ -15,45 +26,30 @@ class Car:
         self.plate = plate
         self.chassis = chassis
 
+    @staticmethod
+    def to_label(key):
+        label = str(key).title().replace('_', ' ').replace('A C', 'A/C')
+        return label
+
     def __str__(self):
+        str_val = ''
 
-        color = {'clean': '\033[m', 'white': '\033[30m', 'red': '\033[31m',
-                 'green': '\033[32m', 'yellow': '\033[33m', 'blue': '\033[34m',
-                 'purple': '\033[35m', 'cyan': '\033[36m'}
-
-        return f'{color["blue"]}{"-=" * 30}{color["clean"]}\n' \
-               f'{color["cyan"]}Name: {color["clean"]}{self.name}\n' \
-               f'{color["cyan"]}Year: {color["clean"]}{self.year}\n' \
-               f'{color["cyan"]}Category: {color["clean"]}{self.category}\n' \
-               f'{color["cyan"]}Color: {color["clean"]}{self.color}\n' \
-               f'{color["cyan"]}A/C: {color["clean"]}{self.a_c}\n' \
-               f'{color["cyan"]}Gear Box: {color["clean"]}{self.gear_box}\n' \
-               f'{color["cyan"]}Fuel: {color["clean"]}{self.fuel}\n' \
-               f'{color["cyan"]}Doors: {color["clean"]}{self.doors}\n' \
-               f'{color["cyan"]}Passengers: {color["clean"]}{self.passengers}\n' \
-               f'{color["cyan"]}Suitcase: {color["clean"]}{self.suitcase}\n' \
-               f'{color["cyan"]}Price: {color["clean"]}{self.price}\n' \
-               f'{color["cyan"]}Plate: {color["clean"]}{self.plate}\n' \
-               f'{color["cyan"]}Chassis: {color["clean"]}{self.chassis}\n' \
-               f'{color["blue"]}{"-=" * 30}{color["clean"]}'
+        for key, value in self.__dict__.items():
+            str_val += f'{tools.colors_dict["cyan"]}{Car.to_label(key)}{tools.colors_dict["clean"]}:{value}\n'
+        return Car.CAR_STR_FMT.format(str_val)
 
     def add_new_car(self):
-        color = {'clean': '\033[m', 'white': '\033[30m', 'red': '\033[31m',
-                 'green': '\033[32m', 'yellow': '\033[33m', 'blue': '\033[34m',
-                 'purple': '\033[35m', 'cyan': '\033[36m'}
-        car_stock = 'car_stock.txt'
-        # new_car = {'Name': self.name, 'Year': self.year}
         try:
-            a = open(car_stock, 'at')
-        except:
-            print('There was an error opening the file!')
+            a = open(Car.CAR_DB_OUTFILE, 'a+')
+        except OSError:
+            tools.print_error(f'There was an error opening the file!')
         else:
             try:
-                a.write(str(self.__dict__))
-            except:
-                print('There was an error when writing the data!')
+                a.write('{}\n'.format(str(self.__dict__)))
+            except OSError:
+                tools.print_error(f'There was an error when writing the data!')
             else:
-                print(f'\n{color["yellow"]}New car {color["clean"]}'
-                      f'< {color["purple"]}{self.name}{color["clean"]} > '
-                      f'{color["yellow"]}successfully added!{color["clean"]}')
+                print(f'\n{tools.colors_dict["yellow"]}New car {tools.colors_dict["clean"]}'
+                      f'< {tools.colors_dict["purple"]}{self.name}{tools.colors_dict["clean"]} > '
+                      f'{tools.colors_dict["yellow"]}successfully added!{tools.colors_dict["clean"]}')
                 a.close()

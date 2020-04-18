@@ -1,0 +1,4 @@
+[
+    {'name': '1', 'age': 55, 'address': '1111111111111111', 'phone': 11111111111, 'email': '1', 'drv_license': '1', 'rentals': 1, 'id_number': 60},
+    {'name': '1', 'age': 55, 'address': '1111111111111111', 'phone': 11111111111, 'email': '1', 'drv_license': '1', 'rentals': 1, 'id_number': 70}
+]

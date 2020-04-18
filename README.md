@@ -149,4 +149,12 @@ Today we:
 
 ## 16/04/2020
 
+	* Worked on my new week exercise about OOP
+
+## 17/04/2020
+
+	* Worked on my new week exercise about OOP
+  
+## 18/04/2020
+
 	* 
