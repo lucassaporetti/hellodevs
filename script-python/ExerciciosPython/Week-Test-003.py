@@ -14,6 +14,7 @@ from car_rental_system import *
 from car_rental_system.tools import *
 from time import sleep
 from random import randint
+from datetime import datetime
 
 USAGE = 'Usage: python '
 
@@ -26,6 +27,7 @@ class LocalDB:
     id_db_file = 'valid_id_list.dat'
     rent_db_file = 'car_rental.dat'
     pending_db_file = 'pending_list.dat'
+    rental_cars_db_file = 'rental_cars_list.dat'
 
     def __init__(self):
         self.cars_list = FileUtils.create(self.car_db_file) \
@@ -38,10 +40,12 @@ class LocalDB:
             if not path.exists(self.customer_db_file) else FileUtils.read(self.customer_db_file)
         self.id_list = FileUtils.create(self.id_db_file) \
             if not os.path.exists(self.id_db_file) else FileUtils.read(self.id_db_file)
-        self.rent_list = FileUtils.create(self.rent_db_file) \
+        self.all_rentals_list = FileUtils.create(self.rent_db_file) \
             if not path.exists(self.rent_db_file) else FileUtils.read(self.rent_db_file)
         self.pending_list = FileUtils.create(self.pending_db_file) \
             if not path.exists(self.pending_db_file) else FileUtils.read(self.pending_db_file)
+        self.rental_cars_list = FileUtils.create(self.rental_cars_db_file) \
+            if not path.exists(self.rental_cars_db_file) else FileUtils.read(self.rental_cars_db_file)
 
     def save_cars(self):
         FileUtils.save(LocalDB.car_db_file, self.cars_list)
@@ -59,10 +63,13 @@ class LocalDB:
         FileUtils.save(LocalDB.id_db_file, self.id_list)
 
     def save_rent(self):
-        FileUtils.save(LocalDB.rent_db_file, self.rent_list)
+        FileUtils.save(LocalDB.rent_db_file, self.all_rentals_list)
 
     def save_pending(self):
         FileUtils.save(LocalDB.pending_db_file, self.pending_list)
+
+    def save_rental_cars(self):
+        FileUtils.save(LocalDB.rental_cars_db_file, self.rental_cars_list)
 
 
 def main_menu():
@@ -135,6 +142,12 @@ def create_pending():
                 item['Pending Payment'] = new_rent.__dict__['price']
         db.save_customers()
         return ret_val
+    elif ret_val == 'N':
+        for item in db.customers_list:
+            if new_rent.__dict__['customer_id'] == item['id_number']:
+                item['Pending Payment'] = 'No'
+        db.save_customers()
+        return ret_val
 
 
 def block_by_pending():
@@ -152,31 +165,82 @@ def block_by_pending():
     if block is False:
         return search_customer_id
 
-#
-# def choose_car():
-#     results = False
-#     while results is False:
-#         for item in db.cars_list:
-#             if item['situation'] == 'Free':
-#
-#         car_search = read_str(f'Choose a car from stock: ').strip().upper()
-#         for item in class_list:
-#             if name_search in item['name'].strip().upper():
-#                 results = True
-#                 print(PrintUtils.colored_line(Colors.blue))
-#                 for key, value in item.items():
-#                     print(f'{Colors.cyan}{key.print_title().replace("_", " ")}{Colors.clean}:{value}')
-#                 print(PrintUtils.colored_line(Colors.blue))
-#         if results is True:
-#             return results
-#         else:
-#             PrintUtils.print_error(f'No {class_name} found.')
+
+def choose_car(status):
+    for item in db.cars_list:
+        if item['situation'] == status:
+            print(PrintUtils.colored_line(Colors.blue))
+            for key, value in item.items():
+                print(f'{Colors.cyan}{key.title().replace("_", " ")}{Colors.clean}:{value}')
+            print(PrintUtils.colored_line(Colors.blue))
+    result = False
+    while result is False:
+        car_search = read_str(f'Enter a license plate from stock to select the car: ', 7, 7).strip().upper()
+        for item in db.cars_list:
+            if car_search == item['plate'].upper().strip() and item['situation'] == status:
+                return car_search
+        if result is False:
+            PrintUtils.print_error('The characters entered do not correspond to an available license plate.')
+
+
+def calc_total_days_price():
+    y = int(new_rent.__dict__['check_out_date'][0:4])
+    m = int(new_rent.__dict__['check_out_date'][5:7])
+    d = int(new_rent.__dict__['check_out_date'][8:10])
+    date_result = datetime(y, m, d)
+    calc_date = date_result - datetime.now()
+    total_days = calc_date.days + 1
+    total_price = 0
+    for a_car in db.cars_list:
+        if new_rent.__dict__['selected_car'] == a_car['plate'].strip().upper():
+            total_price = float(a_car['price'].replace('$', '')) * total_days
+            new_rent.__dict__['price_per_day'] = a_car['price']
+    print(f'\nTotal days: {total_days}\nTotal price: ${total_price}\n')
+    new_rent.__dict__['check_in_date'] = str(datetime.now())
+    new_rent.__dict__['total_days'] = total_days
+    new_rent.__dict__['total_price'] = f'${total_price}'
+
+
+def complete_rent():
+    for unit_car in db.cars_list:
+        if unit_car['plate'].upper().strip() == new_rent.__dict__['selected_car'].upper().strip():
+            unit_car['situation'] = 'Rent'
+            unit_car['rented_by'] = new_rent.__dict__['customer_id']
+            db.rental_cars_list.append(new_rent.__dict__)
+            db.save_rental_cars()
+            db.save_cars()
+
+
+def print_rent():
+    result = False
+    for rent in db.rental_cars_list:
+        if rent['selected_car'] == selected_car.strip().upper():
+            result = True
+            PrintUtils.print_title('SELECTED RENTAL REGISTRATION')
+            print(PrintUtils.colored_line(Colors.blue))
+            for key, value in rent.items():
+                print(f'{Colors.cyan}{key.title().replace("_", " ")}{Colors.clean}:{value}')
+            print(PrintUtils.colored_line(Colors.blue))
+            return_date = read_date('\nEnter the return date: ')
+            y = int(return_date[0:4])
+            m = int(return_date[5:7])
+            d = int(return_date[8:10])
+            date_return_result = datetime(y, m, d)
+            y2 = int(rent['check_out_date'][0:4])
+            m2 = int(rent['check_out_date'][5:7])
+            d2 = int(rent['check_out_date'][8:10])
+            check_out_result = datetime(y2, m2, d2)
+            calc_date = date_return_result - check_out_result
+            total_days = calc_date.days
+            if total_days > 0:
+                price_per_day = rent['price_per_day'].replace('$', '')
+                total_price = total_days * float(price_per_day)
+                print(f'The total value of the return pending is ${total_price}')
 
 
 db = LocalDB()
 done = False
 op = None
-
 
 while not done:
     clear_screen()
@@ -198,7 +262,7 @@ while not done:
                           validate_character('A/C: [Y/N] '), read_str('Gear Box: ', 1, 10),
                           read_str('Fuel: ', 1, 10), read_int('Doors: ', 1),
                           read_int('Passengers: ', 1), read_int('Suitcase: ', 1),
-                          read_float('Price / Day: $'), read_str('Plate: ', 7, 7),
+                          read_float('Price / Day: $'), read_str('Plate: ', 7, 7).upper(),
                           read_str('Chassis: ', 17, 17))
         db.cars_list.append(new_car.__dict__)
         db.save_cars()
@@ -248,25 +312,62 @@ while not done:
             PrintUtils.print_error('There are no employees added to the system.')
         if len(db.customers_list) == 0:
             PrintUtils.print_error('There are no customers added to the system.')
+        if len(db.rental_cars_list) == len(db.cars_list):
+            if len(db.cars_list) != 0:
+                PrintUtils.print_error('No availability. All cars are rented.')
         else:
             clear_screen()
             PrintUtils.print_title('RENT A CAR')
             search_name('Customer', db.customers_list)
+
             print(PrintUtils.colored_line(Colors.blue))
             print(f'{Colors.white}To start a rental record, please enter with the Customer ID{Colors.clean}')
             print(PrintUtils.colored_line(Colors.blue))
+
             financial_tester = block_by_pending()
 
             if financial_tester is True:
                 proceed = input('\nPress enter to proceed to the main menu...')
             else:
-                new_rent = rental.Rental(financial_tester, read_date('Check Out Date: '),
-                                         read_float('Price: $'), find_user_id('Employee', db.employees_list, 1))
+                new_rent = rental.Rental(financial_tester, choose_car('Free'), read_date('Check out date: '),
+                                         find_user_id('Employee', db.employees_list, 1))
+
+                print('Calculating total price...')
+                sleep(0.3)
+
+                calc_total_days_price()
                 create_pending()
-                db.rent_list.append(new_rent.__dict__)
+                complete_rent()
+                db.all_rentals_list.append(new_rent.__dict__)
                 db.save_rent()
+
                 print(new_rent)
                 PrintUtils.print_title(f'{Colors.yellow}New rental successfully completed!{Colors.clean}')
                 proceed = input('\nPress enter to proceed to the main menu...')
-    #
-    # elif op == 4:
+
+    elif op == 4:
+        if len(db.cars_list) == 0:
+            PrintUtils.print_error('There are no cars added in stock.')
+        if len(db.employees_list) == 0:
+            PrintUtils.print_error('There are no employees added to the system.')
+        if len(db.customers_list) == 0:
+            PrintUtils.print_error('There are no customers added to the system.')
+        if len(db.rental_cars_list) == 0:
+            PrintUtils.print_error('No cars are rented.')
+        else:
+            clear_screen()
+            PrintUtils.print_title('RETURN A CAR TO STOCK')
+
+            print(PrintUtils.colored_line(Colors.blue))
+            print(f'{Colors.white}Which car do you want to return?{Colors.clean}')
+            print(PrintUtils.colored_line(Colors.blue))
+
+            selected_car = choose_car('Rent')
+
+            print_rent()
+
+
+
+
+
+

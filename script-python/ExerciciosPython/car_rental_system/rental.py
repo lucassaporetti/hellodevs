@@ -9,10 +9,10 @@ class Rental:
         '{}',
         PrintUtils.colored_line(Colors.blue, end=''))
 
-    def __init__(self, customer_id, check_out_date, price, attendant_id):
+    def __init__(self, customer_id, selected_car, check_out_date, attendant_id):
         self.customer_id = customer_id
+        self.selected_car = selected_car
         self.check_out_date = check_out_date
-        self.price = price
         self.attendant = attendant_id
 
     @staticmethod

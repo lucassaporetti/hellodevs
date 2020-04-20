@@ -1,4 +1,4 @@
-from car_rental_system import user, tools
+from car_rental_system import user
 from car_rental_system.tools import *
 
 
