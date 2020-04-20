@@ -1,69 +1,92 @@
-colors_dict = {'clean': '\033[m',
-               'white': '\033[30m',
-               'red': '\033[31m',
-               'green': '\033[32m',
-               'yellow': '\033[33m',
-               'blue': '\033[34m',
-               'purple': '\033[35m',
-               'cyan': '\033[36m'}
-
-style_dict = {'none': '\033[0m',
-              'bold': '\033[1m',
-              'underline': '\033[4m',
-              'negative': '\033[7m'}
+import ast
+import os
 
 
-def print_error(msg: str, end='\n'):
-    print(f'{colors_dict["red"]}# ERROR: {msg}{colors_dict["clean"]}' + end)
+class Colors:
+    clean = '\033[m'
+    white = '\033[30m'
+    red = '\033[31m'
+    green = '\033[32m'
+    yellow = '\033[33m'
+    blue = '\033[34m'
+    purple = '\033[35m'
+    cyan = '\033[36m'
 
 
-def colored_line(color, line_len=30, end='\n'):
-    return f'{color}{"-=" * line_len}{colors_dict["clean"]}{end}'
+class Style:
+    none = '\033[0m'
+    bold = '\033[1m'
+    underline = '\033[4m'
+    negative = '\033[7m'
 
 
-def line():
-    print('-' + '=-' * 17)
+class PrintUtils:
+    
+    @staticmethod
+    def print_error(msg: str, end='\n'):
+        print(f'{Colors.red}# ERROR: {msg}{Colors.clean}' + end)
+    
+    @staticmethod
+    def colored_line(color, line_len=30, end=''):
+        return f'{color}{"-=" * line_len}{Colors.clean}{end}'
+    
+    @staticmethod
+    def print_line():
+        print('-' + '=-' * 17)
+        
+    @staticmethod
+    def print_title(txt):
+        PrintUtils.print_line()
+        print(f'{Colors.white}{txt.center(34)}{Colors.clean}')
+        PrintUtils.print_line()
 
 
-def title(txt):
-    line()
-    print(f'{colors_dict["white"]}{txt.center(34)}{colors_dict["clean"]}')
-    line()
-
-
-def validate(msg):
+def validate_op(msg):
     ret_val = None
     while ret_val is None:
         try:
             ret_val = int(input(msg))
             if ret_val not in [0, 1, 2, 3, 4, 5, 6]:
-                print_error('Please, choose a valid option.')
+                PrintUtils.print_error('Please, choose a valid option.')
                 ret_val = None
                 continue
         except (ValueError, TypeError):
-            print_error('Please, choose a valid option.')
+            PrintUtils.print_error('Please, choose a valid option.')
             ret_val = None
             continue
         except KeyboardInterrupt:
-            print_error('The user interrupted the program [ctrl+c]')
+            PrintUtils.print_error('The user interrupted the program [ctrl+c]')
             break
-
     return ret_val
 
 
-def validate_user(msg: str):
+def validate_user_op(msg: str):
     ret_val = None
     while ret_val is None:
         try:
             ret_val = input(msg).strip().upper()
             if ret_val not in ['A', 'B', 'C']:
-                print_error('Please, choose a valid option.')
+                PrintUtils.print_error('Please, choose a valid option.')
                 ret_val = None
                 continue
         except KeyboardInterrupt:
-            print_error('The user interrupted the program [ctrl+c]')
+            PrintUtils.print_error('The user interrupted the program [ctrl+c]')
             break
+    return ret_val
 
+
+def validate_character(msg: str):
+    ret_val = None
+    while ret_val is None:
+        try:
+            ret_val = input(msg).strip().upper()
+            if ret_val not in ['Y', 'N']:
+                PrintUtils.print_error('This field only accepts Y or N as a character.')
+                ret_val = None
+                continue
+        except KeyboardInterrupt:
+            PrintUtils.print_error('The user interrupted the program [ctrl+c]')
+            break
     return ret_val
 
 
@@ -73,41 +96,16 @@ def read_int(msg, length):
         try:
             ret_val = int(input(msg))
             if len(str(ret_val)) != length:
-                print_error(f'This value must contain {length} digits.')
+                PrintUtils.print_error(f'This value must contain {length} digits.')
                 ret_val = None
                 continue
         except (ValueError, TypeError):
-            print_error('Please, enter numbers only.')
+            PrintUtils.print_error('Please, enter numbers only.')
             ret_val = None
             continue
         except KeyboardInterrupt:
-            print_error('The user interrupted the program [ctrl+c]')
+            PrintUtils.print_error('The user interrupted the program [ctrl+c]')
             break
-
-    return ret_val
-
-
-def read_age(msg, mini=18, maxi=80):
-    ret_val = None
-    while ret_val is None:
-        try:
-            ret_val = int(input(msg))
-            if ret_val < mini:
-                print_error(f'The user must be at least 18 years old.')
-                ret_val = None
-                continue
-            elif ret_val > maxi:
-                print_error(f'The user must be at most 80 years old.')
-                ret_val = None
-                continue
-        except (ValueError, TypeError):
-            print_error('Please, enter numbers only.')
-            ret_val = None
-            continue
-        except KeyboardInterrupt:
-            print_error('The user interrupted the program [ctrl+c]')
-            break
-
     return ret_val
 
 
@@ -117,13 +115,12 @@ def read_float(msg):
         try:
             ret_val = float(input(msg))
         except (ValueError, TypeError):
-            print_error('Please, enter real numbers only.')
+            PrintUtils.print_error('Please, enter real numbers only.')
             ret_val = None
             continue
         except KeyboardInterrupt:
-            print_error('The user interrupted the program [ctrl+c]')
+            PrintUtils.print_error('The user interrupted the program [ctrl+c]')
             break
-
     return f'${ret_val:.2f}'
 
 
@@ -133,33 +130,39 @@ def read_str(msg: str, min_len=1, max_len=30):
         try:
             ret_val = input(msg).strip()
             if ret_val == '' or len(ret_val) < min_len:
-                print_error(f'This field must contain a minimum of {min_len} characters.')
+                PrintUtils.print_error(f'This field must contain a minimum of {min_len} characters.')
                 ret_val = None
                 continue
             if len(ret_val) > max_len:
-                print_error(f'This field must contain the maximum of {max_len} characters')
+                PrintUtils.print_error(f'This field must contain the maximum of {max_len} characters')
                 ret_val = None
                 continue
         except KeyboardInterrupt:
-            print_error('The user interrupted the program [ctrl+c]')
+            PrintUtils.print_error('The user interrupted the program [ctrl+c]')
             break
-
     return ret_val
 
 
-def read_y_n(msg: str):
+def read_age(msg, mini=18, maxi=80):
     ret_val = None
     while ret_val is None:
         try:
-            ret_val = input(msg).strip().upper()
-            if ret_val not in ['Y', 'N']:
-                print_error('This field only accepts Y or N as a character.')
+            ret_val = int(input(msg))
+            if ret_val < mini:
+                PrintUtils.print_error(f'The user must be at least 18 years old.')
                 ret_val = None
                 continue
+            elif ret_val > maxi:
+                PrintUtils.print_error(f'The user must be at most 80 years old.')
+                ret_val = None
+                continue
+        except (ValueError, TypeError):
+            PrintUtils.print_error('Please, enter numbers only.')
+            ret_val = None
+            continue
         except KeyboardInterrupt:
-            print_error('The user interrupted the program [ctrl+c]')
+            PrintUtils.print_error('The user interrupted the program [ctrl+c]')
             break
-
     return ret_val
 
 
@@ -173,29 +176,38 @@ def read_date(msg: str):
             datetime.datetime.strptime(ret_val, date_format)
             continue
         except ValueError:
-            print_error('Incorrect date format. Accepted format: YYYY/mm/dd')
+            PrintUtils.print_error('Incorrect date format. Accepted format: YYYY/mm/dd')
             ret_val = None
             continue
         except KeyboardInterrupt:
-            print_error('The user interrupted the program [ctrl+c]')
+            PrintUtils.print_error('The user interrupted the program [ctrl+c]')
             break
-
     return ret_val
 
 
-def load_file(name):
-    try:
-        f = open(name, 'r+')
-    except OSError:
-        print('Error reading the files!')
-    else:
-        title('')
-        for line in f:
-            data = line.split(';')
-            data[1] = data[1].replace('\n', '')
-            print(f'{data[0]:<30}{data[1]:>3} anos')
-    finally:
-        f.close()
+class FileUtils:
+    @staticmethod
+    def create(filename: str):
+        if not os.path.exists(filename):
+            open(filename, "w").close()
+        return []
+
+    @staticmethod
+    def read(filename: str):
+        with open(filename, 'r') as f_data:
+            contents = f_data.read()
+            data = ast.literal_eval(contents) if contents else []
+            return data
+
+    @staticmethod
+    def save(filename: str, contents: list):
+        with open(filename, 'w') as f_data:
+            f_data.write(str(contents))
+            f_data.flush()
+
+
+def clear_screen():
+    print('\033[2J')
 
 
 # def registration(file):
@@ -222,5 +234,5 @@ def load_file(name):
 #         None if customer_db_exists else CUSTOMER_DB_OUTFILE,
 #         None if employee_db_exists else EMPLOYEE_DB_OUTFILE
 #     ]
-#     tools.print_error('Could not find the following files: {}'.format(missing))
+#     tools.PrintUtils.print_error('Could not find the following files: {}'.format(missing))
 #     continue

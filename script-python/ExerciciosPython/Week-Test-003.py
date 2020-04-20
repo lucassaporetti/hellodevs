@@ -9,143 +9,264 @@
 """
 
 import sys
-import os
-from car_rental_system import tools, car, user, employee, customer, rental
+from os import path
+from car_rental_system import *
+from car_rental_system.tools import *
 from time import sleep
 from random import randint
-import ast
 
-CAR_DB_OUTFILE = 'car_stock.dat'
-USER_DB_OUTFILE = 'user_list.dat'
-CUSTOMER_DB_OUTFILE = 'customer_list.dat'
-EMPLOYEE_DB_OUTFILE = 'employee_list.dat'
-CAR_RENTAL = 'car_rental.dat'
-
-USAGE = f'Usage: python {CAR_RENTAL}'
-
-colors_dict = {'clean': '\033[m', 'white': '\033[30m', 'red': '\033[31m',
-               'green': '\033[32m', 'yellow': '\033[33m', 'blue': '\033[34m',
-               'purple': '\033[35m', 'cyan': '\033[36m'}
+USAGE = 'Usage: python '
 
 
-def check_db_files():
-    car_db_exists = os.path.exists(CAR_DB_OUTFILE)
-    open(CAR_DB_OUTFILE, 'w').close() if not car_db_exists else None
-    customer_db_exists = os.path.exists(CUSTOMER_DB_OUTFILE)
-    open(CUSTOMER_DB_OUTFILE, 'w').close() if not customer_db_exists else None
-    employee_db_exists = os.path.exists(EMPLOYEE_DB_OUTFILE)
-    open(EMPLOYEE_DB_OUTFILE, 'w').close() if not employee_db_exists else None
+class LocalDB:
+    car_db_file = 'car_stock.dat'
+    user_db_file = 'user_list.dat'
+    customer_db_file = 'customer_list.dat'
+    employee_db_file = 'employee_list.dat'
+    id_db_file = 'valid_id_list.dat'
+    rent_db_file = 'car_rental.dat'
+    pending_db_file = 'pending_list.dat'
+
+    def __init__(self):
+        self.cars_list = FileUtils.create(self.car_db_file) \
+            if not path.exists(self.car_db_file) else FileUtils.read(self.car_db_file)
+        self.users_list = FileUtils.create(self.user_db_file) \
+            if not path.exists(self.user_db_file) else FileUtils.read(self.user_db_file)
+        self.employees_list = FileUtils.create(self.employee_db_file) \
+            if not path.exists(self.employee_db_file) else FileUtils.read(self.employee_db_file)
+        self.customers_list = FileUtils.create(self.customer_db_file) \
+            if not path.exists(self.customer_db_file) else FileUtils.read(self.customer_db_file)
+        self.id_list = FileUtils.create(self.id_db_file) \
+            if not os.path.exists(self.id_db_file) else FileUtils.read(self.id_db_file)
+        self.rent_list = FileUtils.create(self.rent_db_file) \
+            if not path.exists(self.rent_db_file) else FileUtils.read(self.rent_db_file)
+        self.pending_list = FileUtils.create(self.pending_db_file) \
+            if not path.exists(self.pending_db_file) else FileUtils.read(self.pending_db_file)
+
+    def save_cars(self):
+        FileUtils.save(LocalDB.car_db_file, self.cars_list)
+
+    def save_users(self):
+        FileUtils.save(LocalDB.user_db_file, self.users_list)
+
+    def save_employees(self):
+        FileUtils.save(LocalDB.employee_db_file, self.employees_list)
+
+    def save_customers(self):
+        FileUtils.save(LocalDB.customer_db_file, self.customers_list)
+
+    def save_id(self):
+        FileUtils.save(LocalDB.id_db_file, self.id_list)
+
+    def save_rent(self):
+        FileUtils.save(LocalDB.rent_db_file, self.rent_list)
+
+    def save_pending(self):
+        FileUtils.save(LocalDB.pending_db_file, self.pending_list)
 
 
 def main_menu():
-    print(f'\033[1J\033[H\n{colors_dict["purple"]}@ Lucas Rent a Car v0.9.0{colors_dict["clean"]}')
-    tools.title('** Changes are automatically saved')
+    print(f'\033[1J\033[H\n{Colors.purple}@ Lucas Rent a Car v0.9.0{Colors.clean}')
+    PrintUtils.print_title('** Changes are automatically saved')
     menu_options = {'Exit': [0], 'Add Car Model': [1], 'Add User': [2],
                     'Rent a car': [3], 'Return a car': [4], 'Car information': [5], 'Listing': [6]}
     for key, value in menu_options.items():
-        print(f'{colors_dict["blue"]}{value}{colors_dict["clean"]} - '
-              f'{colors_dict["cyan"]}{key}{colors_dict["clean"]}')
-    tools.line()
+        print(f'{Colors.blue}{value}{Colors.clean} - '
+              f'{Colors.cyan}{key}{Colors.clean}')
+    PrintUtils.print_line()
 
 
 def add_user_menu():
-    tools.title('NEW USER REGISTRATION')
+    PrintUtils.print_title('NEW USER REGISTRATION')
     menu_options = {'Employee': '[A]', 'Customer': '[B]', 'Previous Menu': '[C]'}
     for key, value in menu_options.items():
-        print(f'{colors_dict["blue"]}{value}{colors_dict["clean"]} - '
-              f'{colors_dict["cyan"]}{key}{colors_dict["clean"]}')
-    tools.line()
+        print(f'{Colors.blue}{value}{Colors.clean} - '
+              f'{Colors.cyan}{key}{Colors.clean}')
+    PrintUtils.print_line()
 
 
-def find_id():
+def create_random_id(start_num, finish_num):
     ret_val = None
-    with open("customer_list.dat", "r") as file:
-        contents = file.read()
-        customers = ast.literal_eval(contents)
     while ret_val is None:
-        ret_val = tools.read_int('Customer ID: ', 2)
-        for next_customer in customers:
-            if ret_val == next_customer['id_number']:
-                break
-            else:
-                ret_val = None
-                continue
-        if ret_val is None:
-            tools.print_error('Customer ID not found!')
+        ret_val = randint(start_num, finish_num)
+        if len(db.id_list) == 0:
+            return ret_val
+        for next_id in db.id_list:
+            if ret_val != next_id:
+                return ret_val
+        ret_val = None
 
 
-CARS = []
+def find_user_id(class_name, class_list, max_val):
+    ret_val = None
+    while ret_val is None:
+        ret_val = read_int(f'{class_name} ID: ', max_val)
+        for item in class_list:
+            if ret_val == item['id_number']:
+                return ret_val
+        ret_val = None
+        PrintUtils.print_error(f'{class_name} ID not found!')
 
+
+def search_name(class_name, class_list):
+    results = False
+    while results is False:
+        name_search = read_str(f'Search a {class_name} by name: ').strip().upper()
+        for item in class_list:
+            if name_search in item['name'].strip().upper():
+                results = True
+                print(PrintUtils.colored_line(Colors.blue))
+                for key, value in item.items():
+                    print(f'{Colors.cyan}{key.title().replace("_", " ")}{Colors.clean}:{value}')
+                print(PrintUtils.colored_line(Colors.blue))
+        if results is True:
+            return results
+        else:
+            PrintUtils.print_error(f'No {class_name} found.')
+
+
+def create_pending():
+    ret_val = validate_character('Pending Payment: [Y/N] ')
+    if ret_val == 'Y':
+        db.pending_list.append(new_rent.__dict__)
+        db.save_pending()
+        for item in db.customers_list:
+            if new_rent.__dict__['customer_id'] == item['id_number']:
+                item['Pending Payment'] = new_rent.__dict__['price']
+        db.save_customers()
+        return ret_val
+
+
+def block_by_pending():
+    block = False
+    total_pending = ''
+    search_customer_id = find_user_id('Customer', db.customers_list, 2)
+    for pending in db.pending_list:
+        if search_customer_id == pending['customer_id']:
+            block = True
+            total_pending = pending["price"]
+    if block is True:
+        print(f'{Colors.red}Attention! This customer has a pending amount of '
+              f'{total_pending} in the system{Colors.clean}')
+        return block
+    if block is False:
+        return search_customer_id
+
+#
+# def choose_car():
+#     results = False
+#     while results is False:
+#         for item in db.cars_list:
+#             if item['situation'] == 'Free':
+#
+#         car_search = read_str(f'Choose a car from stock: ').strip().upper()
+#         for item in class_list:
+#             if name_search in item['name'].strip().upper():
+#                 results = True
+#                 print(PrintUtils.colored_line(Colors.blue))
+#                 for key, value in item.items():
+#                     print(f'{Colors.cyan}{key.print_title().replace("_", " ")}{Colors.clean}:{value}')
+#                 print(PrintUtils.colored_line(Colors.blue))
+#         if results is True:
+#             return results
+#         else:
+#             PrintUtils.print_error(f'No {class_name} found.')
+
+
+db = LocalDB()
+done = False
 op = None
-check_db_files()
 
-while True:
-    os.system('cls')
+
+while not done:
+    clear_screen()
     main_menu()
-    op = tools.validate(f'{colors_dict["yellow"]}Your Option: {colors_dict["clean"]}')
+    op = validate_op(f'{Colors.yellow}Your Option: {Colors.clean}')
 
     if op == 0:
         print('\nShutting down the system', end='')
         sleep(0.5), print('.', end=''), sleep(0.5),
         print('.', end=''), sleep(0.5), print('.', end='')
         sleep(0.5), print(' See you later!')
-        break
+        done = True
 
     elif op == 1:
-        os.system('cls')
-        print()
-        tools.title('NEW CAR REGISTRATION')
-        new_car = car.Car(tools.read_str('Name: ', 1, 50), tools.read_int('Year: ', 4),
-                          tools.read_str('Category: ', 1, 15), tools.read_str('Color: ', 1, 15),
-                          tools.read_y_n('A/C: [Y/N] '), tools.read_str('Gear Box: ', 1, 10),
-                          tools.read_str('Fuel: ', 1, 10), tools.read_int('Doors: ', 1),
-                          tools.read_int('Passengers: ', 1), tools.read_int('Suitcase: ', 1),
-                          tools.read_float('Price / Day: $'), tools.read_str('Plate: ', 7, 7),
-                          tools.read_str('Chassis: ', 17, 17))
-        car.Car.add_new_car(new_car)
-
+        clear_screen()
+        PrintUtils.print_title('NEW CAR REGISTRATION')
+        new_car = car.Car(read_str('Name: ', 1, 50), read_int('Year: ', 4),
+                          read_str('Category: ', 1, 15), read_str('Color: ', 1, 15),
+                          validate_character('A/C: [Y/N] '), read_str('Gear Box: ', 1, 10),
+                          read_str('Fuel: ', 1, 10), read_int('Doors: ', 1),
+                          read_int('Passengers: ', 1), read_int('Suitcase: ', 1),
+                          read_float('Price / Day: $'), read_str('Plate: ', 7, 7),
+                          read_str('Chassis: ', 17, 17))
+        db.cars_list.append(new_car.__dict__)
+        db.save_cars()
         print(new_car)
         proceed = input('\nPress enter to proceed to the main menu...')
 
     elif op == 2:
-        os.system('cls')
-        print()
+        clear_screen()
         add_user_menu()
-        user_op = tools.validate_user(f'{colors_dict["yellow"]}Your Option: {colors_dict["clean"]}')
+        user_op = validate_user_op(f'{Colors.yellow}Your Option: {Colors.clean}')
 
         if user_op == 'A':
-            new_user = employee.Employee(tools.read_str('Name: ', 1, 50), tools.read_age('Age: '),
-                                         tools.read_str('Address: ', 10, 100), tools.read_int('Phone: ', 11),
-                                         tools.read_str('Email: ', 1, 50), tools.read_str('Access Type: ', 1, 30),
-                                         tools.read_date('Hired Date: '), tools.read_float('Salary: $'),
-                                         randint(1, 100))
-
-            employee.Employee.add_new_employee(new_user)
-            user.User.add_new_user(new_user)
+            new_user = employee.Employee(read_str('Name: ', 1, 50), read_age('Age: '),
+                                         read_str('Address: ', 10, 100), read_int('Phone: ', 11),
+                                         read_str('Email: ', 1, 50), read_str('Access Type: ', 1, 30),
+                                         read_date('Hired Date: '), read_float('Salary: $'),
+                                         create_random_id(1, 9))
+            db.users_list.append(new_user.__dict__)
+            db.save_users()
+            db.employees_list.append(new_user.__dict__)
+            db.save_employees()
+            db.id_list.append(new_user.__dict__['id_number'])
+            db.save_id()
             print(new_user)
+            proceed = input('\nPress enter to proceed to the main menu...')
 
         elif user_op == 'B':
-            new_user = customer.Customer(tools.read_str('Name: ', 1, 50), tools.read_age('Age: '),
-                                         tools.read_str('Address: ', 10, 100), tools.read_int('Phone: ', 11),
-                                         tools.read_str('Email: ', 1, 50), tools.read_str('Driver License: ', 1, 30),
-                                         tools.read_int('Rentals: ', 1), randint(1, 100))
-            customer.Customer.add_new_customer(new_user)
-            user.User.add_new_user(new_user)
+            new_user = customer.Customer(read_str('Name: ', 1, 50), read_age('Age: '),
+                                         read_str('Address: ', 10, 100), read_int('Phone: ', 11),
+                                         read_str('Email: ', 1, 50), read_str('Driver License: ', 1, 30),
+                                         create_random_id(10, 99))
+            db.users_list.append(new_user.__dict__)
+            db.save_users()
+            db.customers_list.append(new_user.__dict__)
+            db.save_customers()
+            db.id_list.append(new_user.__dict__['id_number'])
+            db.save_id()
             print(new_user)
-
+            proceed = input('\nPress enter to proceed to the main menu...')
         else:
             continue
 
-        proceed = input('\nPress enter to proceed to the main menu...')
-
     elif op == 3:
-        os.system('cls')
-        print()
-        tools.title('RENT A CAR')
-        new_rent = rental.Rental(find_id(), tools.read_date('Check Out Date: '),
-                                 tools.read_float('Price: $'), 'Pending Payment: NO',
-                                 tools.read_int('Attendant ID: ', 10))
-        rental.Rental.add_new_rent(new_rent)
+        if len(db.cars_list) == 0:
+            PrintUtils.print_error('There are no cars added in stock.')
+        if len(db.employees_list) == 0:
+            PrintUtils.print_error('There are no employees added to the system.')
+        if len(db.customers_list) == 0:
+            PrintUtils.print_error('There are no customers added to the system.')
+        else:
+            clear_screen()
+            PrintUtils.print_title('RENT A CAR')
+            search_name('Customer', db.customers_list)
+            print(PrintUtils.colored_line(Colors.blue))
+            print(f'{Colors.white}To start a rental record, please enter with the Customer ID{Colors.clean}')
+            print(PrintUtils.colored_line(Colors.blue))
+            financial_tester = block_by_pending()
 
-        print(new_rent)
-        proceed = input('\nPress enter to proceed to the main menu...')
+            if financial_tester is True:
+                proceed = input('\nPress enter to proceed to the main menu...')
+            else:
+                new_rent = rental.Rental(financial_tester, read_date('Check Out Date: '),
+                                         read_float('Price: $'), find_user_id('Employee', db.employees_list, 1))
+                create_pending()
+                db.rent_list.append(new_rent.__dict__)
+                db.save_rent()
+                print(new_rent)
+                PrintUtils.print_title(f'{Colors.yellow}New rental successfully completed!{Colors.clean}')
+                proceed = input('\nPress enter to proceed to the main menu...')
+    #
+    # elif op == 4:

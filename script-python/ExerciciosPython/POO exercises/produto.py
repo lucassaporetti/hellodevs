@@ -24,5 +24,5 @@ class Produto:
 
     @nome.setter
     def nome(self, valor):
-        self._nome = valor.title().replace('a', '@')
+        self._nome = valor.print_title().replace('a', '@')
 

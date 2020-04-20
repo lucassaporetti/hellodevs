@@ -1,4 +1,1 @@
-[
-    {'name': '1', 'age': 55, 'address': '1111111111111111', 'phone': 11111111111, 'email': '1', 'drv_license': '1', 'rentals': 1, 'id_number': 60},
-    {'name': '1', 'age': 55, 'address': '1111111111111111', 'phone': 11111111111, 'email': '1', 'drv_license': '1', 'rentals': 1, 'id_number': 70}
-]
+[{'name': 'Lucas Joao', 'age': 24, 'address': 'Rua dos Bobos, n 0', 'phone': 11988566985, 'email': 'joaobobo@gmail.com', 'drv_license': 'sp123456', 'id_number': 57}, {'name': 'Joao Bobo', 'age': 24, 'address': 'Rua dos Bobos, n 0', 'phone': 11988566985, 'email': 'joaobobo@gmail.com', 'drv_license': 'sp123456', 'id_number': 58, 'Pending Payment': '$200.00'}, {'name': 'Paulo Devedor', 'age': 58, 'address': 'Rua dos caloteiros, numero 0', 'phone': 11988544787, 'email': 'calote@calote.com.br', 'drv_license': 'sp1234587', 'id_number': 47}]
