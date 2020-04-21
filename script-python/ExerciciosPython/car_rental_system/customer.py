@@ -12,6 +12,7 @@ class Customer(user.User):
         super().__init__(name, age, address, phone, email)
         self.drv_license = drv_license
         self.id_number = id_number
+        self.pending_payment = 0
 
     @staticmethod
     def to_label(key):

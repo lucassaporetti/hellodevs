@@ -25,7 +25,7 @@ class LocalDB:
     customer_db_file = 'customer_list.dat'
     employee_db_file = 'employee_list.dat'
     id_db_file = 'valid_id_list.dat'
-    rent_db_file = 'car_rental.dat'
+    rent_db_file = 'rental_history'
     pending_db_file = 'pending_list.dat'
     rental_cars_db_file = 'rental_cars_list.dat'
 
@@ -133,19 +133,19 @@ def search_name(class_name, class_list):
 
 
 def create_pending():
-    ret_val = validate_character('Pending Payment: [Y/N] ')
+    ret_val = validate_character('pending_payment: [Y/N] ')
     if ret_val == 'Y':
-        db.pending_list.append(new_rent.__dict__)
-        db.save_pending()
+        new_rent.__dict__['pending_payment'] = new_rent.__dict__['total_price']
         for item in db.customers_list:
             if new_rent.__dict__['customer_id'] == item['id_number']:
-                item['Pending Payment'] = new_rent.__dict__['price']
+                item['pending_payment'] = new_rent.__dict__['total_price']
         db.save_customers()
         return ret_val
-    elif ret_val == 'N':
+    if ret_val == 'N':
+        new_rent.__dict__['pending_payment'] = 0
         for item in db.customers_list:
             if new_rent.__dict__['customer_id'] == item['id_number']:
-                item['Pending Payment'] = 'No'
+                item['pending_payment'] = 0
         db.save_customers()
         return ret_val
 
@@ -154,10 +154,11 @@ def block_by_pending():
     block = False
     total_pending = ''
     search_customer_id = find_user_id('Customer', db.customers_list, 2)
-    for pending in db.pending_list:
-        if search_customer_id == pending['customer_id']:
-            block = True
-            total_pending = pending["price"]
+    for a_customer in db.customers_list:
+        if search_customer_id == a_customer['id_number']:
+            if a_customer['pending_payment'] != 0:
+                block = True
+                total_pending = a_customer['pending_payment']
     if block is True:
         print(f'{Colors.red}Attention! This customer has a pending amount of '
               f'{total_pending} in the system{Colors.clean}')
@@ -206,16 +207,12 @@ def complete_rent():
         if unit_car['plate'].upper().strip() == new_rent.__dict__['selected_car'].upper().strip():
             unit_car['situation'] = 'Rent'
             unit_car['rented_by'] = new_rent.__dict__['customer_id']
-            db.rental_cars_list.append(new_rent.__dict__)
-            db.save_rental_cars()
-            db.save_cars()
 
 
-def print_rent():
-    result = False
-    for rent in db.rental_cars_list:
+def return_rent():
+    result = True
+    for rent in db.pending_list:
         if rent['selected_car'] == selected_car.strip().upper():
-            result = True
             PrintUtils.print_title('SELECTED RENTAL REGISTRATION')
             print(PrintUtils.colored_line(Colors.blue))
             for key, value in rent.items():
@@ -232,10 +229,66 @@ def print_rent():
             check_out_result = datetime(y2, m2, d2)
             calc_date = date_return_result - check_out_result
             total_days = calc_date.days
+            if rent['pending_payment'] != 0:
+                previous_pending = rent['pending_payment'].replace('$', '')
+            else:
+                previous_pending = 0
+            if total_days == 0 and previous_pending == 0:
+                for a_car in db.cars_list:
+                    if rent['selected_car'] == a_car['plate']:
+                        del a_car['rented_by']
+                        a_car['situation'] = 'Free'
+                        db.save_cars()
+                        db.pending_list.remove(rent)
+                        db.save_pending()
+                        return result
+            if total_days == 0 and float(previous_pending) > 0:
+                print(f'The total value of the return pending is ${previous_pending}')
+                ret_val = validate_character('Pending payment?: [Y/N] ')
+                for a_car in db.cars_list:
+                    if rent['selected_car'] == a_car['plate']:
+                        del a_car['rented_by']
+                        a_car['situation'] = 'Free'
+                        db.save_cars()
+                if ret_val == 'N':
+                    for a_customer in db.customers_list:
+                        if rent['customer_id'] == a_customer['id_number']:
+                            a_customer['pending_payment'] = 0
+                            db.save_customers()
+                            db.pending_list.remove(rent)
+                            db.save_pending()
+                            return result
+                if ret_val == 'Y':
+                    return result
             if total_days > 0:
                 price_per_day = rent['price_per_day'].replace('$', '')
-                total_price = total_days * float(price_per_day)
+                total_price = float(previous_pending) + (total_days * float(price_per_day))
                 print(f'The total value of the return pending is ${total_price}')
+                ret_val = validate_character('Pending payment?: [Y/N] ')
+                for a_car in db.cars_list:
+                    if rent['selected_car'] == a_car['plate']:
+                        del a_car['rented_by']
+                        a_car['situation'] = 'Free'
+                        db.save_cars()
+                if ret_val == 'N':
+                    for a_customer in db.customers_list:
+                        if rent['customer_id'] == a_customer['id_number']:
+                            a_customer['pending_payment'] = 0
+                            db.save_customers()
+                            db.pending_list.remove(rent)
+                            db.save_pending()
+                            return result
+                if ret_val == 'Y':
+                    rent['check_out_date'] = return_date
+                    rent['total_days'] = rent['total_days'] + total_days
+                    rent['total_price'] = f'${total_price}'
+                    rent['pending_payment'] = f'${total_price}'
+                    db.save_pending()
+                    for a_customer in db.customers_list:
+                        if rent['customer_id'] == a_customer['id_number']:
+                            a_customer['pending_payment'] = f'${total_price}'
+                            db.save_customers()
+                            return result
 
 
 db = LocalDB()
@@ -312,9 +365,9 @@ while not done:
             PrintUtils.print_error('There are no employees added to the system.')
         if len(db.customers_list) == 0:
             PrintUtils.print_error('There are no customers added to the system.')
-        if len(db.rental_cars_list) == len(db.cars_list):
-            if len(db.cars_list) != 0:
-                PrintUtils.print_error('No availability. All cars are rented.')
+        # if len(db.pending_list) == len(db.cars_list):
+        #     if len(db.cars_list) != 0:
+        #         PrintUtils.print_error('No availability. All cars are rented.')
         else:
             clear_screen()
             PrintUtils.print_title('RENT A CAR')
@@ -338,6 +391,9 @@ while not done:
                 calc_total_days_price()
                 create_pending()
                 complete_rent()
+                db.pending_list.append(new_rent.__dict__)
+                db.save_pending()
+                db.save_cars()
                 db.all_rentals_list.append(new_rent.__dict__)
                 db.save_rent()
 
@@ -352,7 +408,7 @@ while not done:
             PrintUtils.print_error('There are no employees added to the system.')
         if len(db.customers_list) == 0:
             PrintUtils.print_error('There are no customers added to the system.')
-        if len(db.rental_cars_list) == 0:
+        if len(db.pending_list) == 0:
             PrintUtils.print_error('No cars are rented.')
         else:
             clear_screen()
@@ -364,10 +420,7 @@ while not done:
 
             selected_car = choose_car('Rent')
 
-            print_rent()
+            return_rent()
 
-
-
-
-
-
+            PrintUtils.print_title(f'{Colors.yellow}Car return successfully completed!{Colors.clean}')
+            proceed = input('\nPress enter to proceed to the main menu...')
