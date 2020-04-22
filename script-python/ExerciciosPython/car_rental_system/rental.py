@@ -4,7 +4,7 @@ from car_rental_system.tools import *
 class Rental:
     RENTAL_DB_OUTFILE = 'rental_list.dat'
 
-    RENTAL_STR_FMT = '{}{}{}'.format(
+    RENTAL_STR_FMT = '{}\n{}{}'.format(
         PrintUtils.colored_line(Colors.blue),
         '{}',
         PrintUtils.colored_line(Colors.blue, end=''))
@@ -23,5 +23,5 @@ class Rental:
     def __str__(self):
         str_val = ''
         for key, value in self.__dict__.items():
-            str_val += f'\n{Colors.cyan}{Rental.to_label(key)}{Colors.clean}:{value}\n'
+            str_val += f'{Colors.cyan}{Rental.to_label(key)}{Colors.clean}:{value}\n'
         return Rental.RENTAL_STR_FMT.format(str_val)

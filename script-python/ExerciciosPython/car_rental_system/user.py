@@ -4,7 +4,7 @@ from car_rental_system.tools import *
 class User:
     USER_DB_OUTFILE = 'user_list.dat'
 
-    USER_STR_FMT = '{}{}{}'.format(
+    USER_STR_FMT = '{}\n{}{}'.format(
         PrintUtils.colored_line(Colors.blue),
         '{}',
         PrintUtils.colored_line(Colors.blue, end=''))

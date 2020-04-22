@@ -3,7 +3,7 @@ from car_rental_system.tools import *
 
 
 class Employee(user.User):
-    EMPLOYEE_STR_FMT = '{}{}{}'.format(
+    EMPLOYEE_STR_FMT = '{}\n{}{}'.format(
         PrintUtils.colored_line(Colors.blue),
         '{}',
         PrintUtils.colored_line(Colors.blue, end=''))

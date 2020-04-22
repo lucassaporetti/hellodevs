@@ -41,6 +41,10 @@ class PrintUtils:
         PrintUtils.print_line()
 
 
+def clear_screen():
+    print('\033[2J')
+
+
 def validate_op(msg):
     ret_val = None
     while ret_val is None:
@@ -66,6 +70,21 @@ def validate_user_op(msg: str):
         try:
             ret_val = input(msg).strip().upper()
             if ret_val not in ['A', 'B', 'C']:
+                PrintUtils.print_error('Please, choose a valid option.')
+                ret_val = None
+                continue
+        except KeyboardInterrupt:
+            PrintUtils.print_error('The user interrupted the program [ctrl+c]')
+            break
+    return ret_val
+
+
+def validate_listing_op(msg: str):
+    ret_val = None
+    while ret_val is None:
+        try:
+            ret_val = input(msg).strip().upper()
+            if ret_val not in ['A', 'B', 'C', 'D', 'E', 'F']:
                 PrintUtils.print_error('Please, choose a valid option.')
                 ret_val = None
                 continue
@@ -204,35 +223,3 @@ class FileUtils:
         with open(filename, 'w') as f_data:
             f_data.write(str(contents))
             f_data.flush()
-
-
-def clear_screen():
-    print('\033[2J')
-
-
-# def registration(file):
-#     try:
-#         a = open(file, 'at')
-#     except:
-#         print('There was an error opening the file!')
-#     else:
-#         try:
-#             a.write(f'{name}; {idade}\n')
-#         except:
-#             print('Houve um erro na hora de escrever os dados!')
-#         else:
-#             print(f'Novo registro de {nome} adicionado')
-#             a.close()
-
-# car_db_exists = os.path.exists(CAR_DB_OUTFILE)
-# customer_db_exists = os.path.exists(CUSTOMER_DB_OUTFILE)
-# employee_db_exists = os.path.exists(EMPLOYEE_DB_OUTFILE)
-#
-# if not car_db_exists or not customer_db_exists or not employee_db_exists:
-#     missing = [
-#         None if car_db_exists else CAR_DB_OUTFILE,
-#         None if customer_db_exists else CUSTOMER_DB_OUTFILE,
-#         None if employee_db_exists else EMPLOYEE_DB_OUTFILE
-#     ]
-#     tools.PrintUtils.print_error('Could not find the following files: {}'.format(missing))
-#     continue

@@ -2,7 +2,7 @@ from car_rental_system.tools import *
 
 
 class Car:
-    CAR_STR_FMT = '{}{}{}'.format(
+    CAR_STR_FMT = '{}\n{}{}'.format(
         PrintUtils.colored_line(Colors.blue),
         '{}',
         PrintUtils.colored_line(Colors.blue, end=''))

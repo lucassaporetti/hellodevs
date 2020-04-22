@@ -1,1 +1,1 @@
-[{'name': 'Toyota Corolla', 'year': 2020, 'category': 'Sedan', 'color': 'Red', 'a_c': 'Y', 'gear_box': 'Automatic', 'fuel': 'Flex', 'doors': 5, 'passengers': 5, 'suitcase': 3, 'price': '$200.00', 'plate': 'HCJ4120', 'chassis': '12345678936985214', 'situation': 'Free'}]
+[{'name': 'Toyota Corolla', 'year': 2020, 'category': 'Sedan', 'color': 'Red', 'a_c': 'Y', 'gear_box': 'Automatic', 'fuel': 'Flex', 'doors': 5, 'passengers': 5, 'suitcase': 5, 'price': '$200.00', 'plate': 'HCJ4120', 'chassis': '12345678998756547', 'situation': 'Free'}]

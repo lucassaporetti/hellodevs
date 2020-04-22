@@ -3,7 +3,7 @@ from car_rental_system.tools import *
 
 
 class Customer(user.User):
-    CUSTOMER_STR_FMT = '{}{}{}'.format(
+    CUSTOMER_STR_FMT = '{}\n{}{}'.format(
         PrintUtils.colored_line(Colors.blue),
         '{}',
         PrintUtils.colored_line(Colors.blue, end=''))
@@ -13,6 +13,7 @@ class Customer(user.User):
         self.drv_license = drv_license
         self.id_number = id_number
         self.pending_payment = 0
+        self.total_rents = 0
 
     @staticmethod
     def to_label(key):
