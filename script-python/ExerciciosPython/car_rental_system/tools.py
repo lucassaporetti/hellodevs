@@ -186,14 +186,24 @@ def read_age(msg, mini=18, maxi=80):
 
 
 def read_date(msg: str):
-    import datetime
+    from datetime import datetime
     ret_val = None
     while ret_val is None:
         try:
             date_format = '%Y/%m/%d'
             ret_val = input(msg)
-            datetime.datetime.strptime(ret_val, date_format)
-            continue
+            datetime.strptime(ret_val, date_format)
+            y = int(ret_val[0:4])
+            m = int(ret_val[5:7])
+            d = int(ret_val[8:10])
+            date_result = datetime(y, m, d)
+            calc_date = date_result - datetime.now()
+            total_days = calc_date.days + 1
+            if total_days > 0:
+                return ret_val
+            else:
+                PrintUtils.print_error('The date must be at least one day in the future.')
+                ret_val = None
         except ValueError:
             PrintUtils.print_error('Incorrect date format. Accepted format: YYYY/mm/dd')
             ret_val = None
@@ -201,7 +211,6 @@ def read_date(msg: str):
         except KeyboardInterrupt:
             PrintUtils.print_error('The user interrupted the program [ctrl+c]')
             break
-    return ret_val
 
 
 class FileUtils:

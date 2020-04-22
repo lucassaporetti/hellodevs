@@ -157,4 +157,20 @@ Today we:
   
 ## 18/04/2020
 
+	* Worked on my new week exercise about OOP
+
+## 19/04/2020
+
+	* Worked on my new week exercise about OOP
+
+## 20/04/2020
+
+	* Worked on my new week exercise about OOP
+
+## 21/04/2020
+
+	* Finished my exercise about OOP and completed the final version of the Rent a Car System
+  
+## 22/04/2020
+
 	* 

@@ -1,1 +1,1 @@
-[]
+[{'customer_id': 77, 'selected_car': 'HSN1211', 'check_out_date': '2020/04/20', 'attendant': 7, 'price_per_day': '$200.00', 'check_in_date': '2020-04-21 22:42:17', 'total_days': -1, 'total_price': '$-200.00', 'pending_payment': '$-200.00', 'customer_sign': 'hugo'}, {'customer_id': 54, 'selected_car': 'HCJ4120', 'check_out_date': '2021/04/19', 'attendant': 7, 'price_per_day': '$200.00', 'check_in_date': '2020-04-21 22:59:56', 'total_days': 363, 'total_price': '$72600.00', 'pending_payment': 0, 'customer_sign': 'Joao Bobo'}]
