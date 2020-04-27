@@ -66,7 +66,7 @@ class LocalDB:
 
 
 def main_menu():
-    print(f'\033[1J\033[H\n{Colors.purple}@ Lucas Rent a Car v0.9.0{Colors.clean}')
+    print(f'\033[2J\033[H\n{Colors.purple}@ Lucas Rent a Car v0.9.0{Colors.clean}')
     PrintUtils.print_title('** Changes are automatically saved')
     menu_options = {'Exit': [0], 'Add Car Model': [1], 'Add User': [2], 'Rent a car': [3],
                     'Return a car': [4], 'Settle pending payments(TO DO...)': [5], 'Listing': [6]}
@@ -77,7 +77,7 @@ def main_menu():
 
 
 def add_user_menu():
-    PrintUtils.print_title('NEW USER REGISTRATION')
+    PrintUtils.print_title('\033[2J\033[H\nNEW USER REGISTRATION')
     menu_options = {'Employee': '[A]', 'Customer': '[B]', 'Previous Menu': '[C]'}
     for key, value in menu_options.items():
         print(f'{Colors.blue}{value}{Colors.clean} - '
@@ -86,7 +86,7 @@ def add_user_menu():
 
 
 def listing_menu():
-    PrintUtils.print_title('LISTING MENU')
+    PrintUtils.print_title('\033[2J\033[H\nLISTING MENU')
     menu_options = {'Employees': '[A]', 'Customers': '[B]', 'Car models': '[C]', 'Rentals': '[D]',
                     'Pending Rents': '[E]', 'Main Menu': '[F]'}
     for key, value in menu_options.items():

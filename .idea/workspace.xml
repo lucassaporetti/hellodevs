@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6b6e1cf3-1f53-48b6-a94c-771021064dff" name="Default Changelist" comment="" />
+    <list default="true" id="6b6e1cf3-1f53-48b6-a94c-771021064dff" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/hellodevs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hellodevs.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/Week-Test-003.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/Week-Test-003.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/bookstore.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/car_stock.dat" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/car_stock.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/customer_list.dat" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/customer_list.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/employee_list.dat" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/employee_list.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/pending_list.dat" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/pending_list.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/rental_history.dat" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/rental_history.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/user_list.dat" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/user_list.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/valid_id_list.dat" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/valid_id_list.dat" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +27,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1ZxiGLj6sTvhMrBEWsshMZrB16N" />
   <component name="ProjectViewState">
     <option name="abbreviatePackageNames" value="true" />
@@ -22,10 +38,11 @@
     <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.Week-Test-003">
     <configuration name="Week-Test-002-Solved" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="hellodevs" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -47,37 +64,88 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Week-Test-003" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="hellodevs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/script-python/ExerciciosPython" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-python/ExerciciosPython/Week-Test-003.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Week-Test-003" />
         <item itemvalue="Python.Week-Test-002-Solved" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6b6e1cf3-1f53-48b6-a94c-771021064dff" name="Default Changelist" comment="" />
+      <created>1587788484328</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587788484328</updated>
+    </task>
+    <servers />
   </component>
   <component name="WindowStateProjectService">
     <state x="522" y="352" key="#Shellcheck" timestamp="1585787839656">
       <screen x="0" y="23" width="1440" height="834" />
     </state>
     <state x="522" y="352" key="#Shellcheck/0.23.1440.834/-459.-1057.2560.1057@0.23.1440.834" timestamp="1585787839656" />
+    <state x="380" y="27" width="666" height="741" key="#Week-Test-002-Solved" timestamp="1587788513979">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state x="380" y="27" width="666" height="741" key="#Week-Test-002-Solved/70.27.1296.741@70.27.1296.741" timestamp="1587788513979" />
+    <state x="380" y="27" width="666" height="741" key="#Week-Test-003" timestamp="1587788526182">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state x="380" y="27" width="666" height="741" key="#Week-Test-003/70.27.1296.741@70.27.1296.741" timestamp="1587788526182" />
     <state x="483" y="150" key="#xdebugger.evaluate" timestamp="1585795588656">
       <screen x="0" y="23" width="1440" height="834" />
     </state>
     <state x="483" y="150" key="#xdebugger.evaluate/0.23.1440.834/-459.-1057.2560.1057@0.23.1440.834" timestamp="1585795588656" />
-    <state width="1419" height="268" key="GridCell.Tab.0.bottom" timestamp="1585795434373">
-      <screen x="0" y="23" width="1440" height="834" />
+    <state x="496" y="158" width="424" height="491" key="FileChooserDialogImpl" timestamp="1587788652730">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state x="496" y="158" width="424" height="491" key="FileChooserDialogImpl/70.27.1296.741@70.27.1296.741" timestamp="1587788652730" />
+    <state width="1273" height="551" key="GridCell.Tab.0.bottom" timestamp="1587790214049">
+      <screen x="70" y="27" width="1296" height="741" />
     </state>
     <state width="1419" height="268" key="GridCell.Tab.0.bottom/0.23.1440.834/-459.-1057.2560.1057@0.23.1440.834" timestamp="1585795434373" />
-    <state width="1419" height="268" key="GridCell.Tab.0.center" timestamp="1585795434373">
-      <screen x="0" y="23" width="1440" height="834" />
+    <state width="1273" height="551" key="GridCell.Tab.0.bottom/70.27.1296.741@70.27.1296.741" timestamp="1587790214049" />
+    <state width="1273" height="551" key="GridCell.Tab.0.center" timestamp="1587790214048">
+      <screen x="70" y="27" width="1296" height="741" />
     </state>
     <state width="1419" height="268" key="GridCell.Tab.0.center/0.23.1440.834/-459.-1057.2560.1057@0.23.1440.834" timestamp="1585795434373" />
-    <state width="1419" height="268" key="GridCell.Tab.0.left" timestamp="1585795434372">
-      <screen x="0" y="23" width="1440" height="834" />
+    <state width="1273" height="551" key="GridCell.Tab.0.center/70.27.1296.741@70.27.1296.741" timestamp="1587790214048" />
+    <state width="1273" height="551" key="GridCell.Tab.0.left" timestamp="1587790214048">
+      <screen x="70" y="27" width="1296" height="741" />
     </state>
     <state width="1419" height="268" key="GridCell.Tab.0.left/0.23.1440.834/-459.-1057.2560.1057@0.23.1440.834" timestamp="1585795434372" />
-    <state width="1419" height="268" key="GridCell.Tab.0.right" timestamp="1585795434373">
-      <screen x="0" y="23" width="1440" height="834" />
+    <state width="1273" height="551" key="GridCell.Tab.0.left/70.27.1296.741@70.27.1296.741" timestamp="1587790214048" />
+    <state width="1273" height="551" key="GridCell.Tab.0.right" timestamp="1587790214048">
+      <screen x="70" y="27" width="1296" height="741" />
     </state>
     <state width="1419" height="268" key="GridCell.Tab.0.right/0.23.1440.834/-459.-1057.2560.1057@0.23.1440.834" timestamp="1585795434373" />
+    <state width="1273" height="551" key="GridCell.Tab.0.right/70.27.1296.741@70.27.1296.741" timestamp="1587790214048" />
     <state width="1419" height="268" key="GridCell.Tab.1.bottom" timestamp="1585795469416">
       <screen x="0" y="23" width="1440" height="834" />
     </state>
@@ -94,6 +162,10 @@
       <screen x="0" y="23" width="1440" height="834" />
     </state>
     <state width="1419" height="268" key="GridCell.Tab.1.right/0.23.1440.834/-459.-1057.2560.1057@0.23.1440.834" timestamp="1585795469415" />
+    <state x="0" y="27" width="618" height="741" key="find.popup" timestamp="1587789347522">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state x="0" y="27" width="618" height="741" key="find.popup/70.27.1296.741@70.27.1296.741" timestamp="1587789347522" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

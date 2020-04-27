@@ -173,4 +173,31 @@ Today we:
   
 ## 22/04/2020
 
-	* 
+	* Installed Ubuntu and learned more about the history of the Linux system
+
+## 23/04/2020
+
+	* Learned more about git and github
+	* Learned more about the Linux command line
+
+## 24/04/2020
+
+	* Continued my studies about Linux
+
+## 25/04/2020
+
+	* Hang over day
+
+## 26/04/2020
+
+	* Sunday dreams
+
+## 27/04/2020
+
+	* Finished my course about Linux command line
+	* Finished the exercises of git
+	* Learned more about regex and vt100
+
+## 28/04/2020
+
+	*
