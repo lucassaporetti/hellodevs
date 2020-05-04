@@ -200,4 +200,45 @@ Today we:
 
 ## 28/04/2020
 
+	* Conclued my regex course
+
+## 29/04/2020
+
+	* Started my YouTube course about SQL
+	* Learned about the history of databases
+	* Learned about the types of databases
+	* Shallow learn about DDL, DML, DQL, DCL and DTL commands
+	* Learned how to install MySQL and Workbench on Ubuntu system
+
+## 30/04/2020
+
+	* Learned how to create a new db
+	* Learned how to create a new table
+	* Learned how to show, describe, get status, use and drop db's and tables
+	* Learned how to select a db
+
+## 01/05/2020
+
+	* Learned about the primitive types of MySQL
+	* Learned about Constraints
+	* Learned how to define characters in UTF8 standard
+	* Learned about 'not null', 'enum' and 'decimal' commands
+
+## 02/05/2020
+
+	* Learned about default lines
+	* Learned about primary keys
+	* Learned about auto_increment
+	* Learned how to insert data in tables
+	* Learned how to alter tables, columns and lines
+	* Learned how to modify and rename tables, columns and lines
+	* Learned about 'unsigned' and 'unique' commands
+
+## 03/05/2020
+
+	* Funny day
+
+## 04/05/2020
+
 	*
+

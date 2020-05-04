@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b6e1cf3-1f53-48b6-a94c-771021064dff" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/hellodevs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hellodevs.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/Week-Test-003.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/Week-Test-003.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/bookstore.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/car_stock.dat" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/car_stock.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/customer_list.dat" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/customer_list.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/employee_list.dat" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/employee_list.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/pending_list.dat" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/pending_list.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/rental_history.dat" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/rental_history.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/user_list.dat" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/user_list.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-python/ExerciciosPython/valid_id_list.dat" beforeDir="false" afterPath="$PROJECT_DIR$/script-python/ExerciciosPython/valid_id_list.dat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +29,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="full.screen.before.presentation.mode" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager" selected="Python.Week-Test-003">
     <configuration name="Week-Test-002-Solved" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -162,6 +153,10 @@
       <screen x="0" y="23" width="1440" height="834" />
     </state>
     <state width="1419" height="268" key="GridCell.Tab.1.right/0.23.1440.834/-459.-1057.2560.1057@0.23.1440.834" timestamp="1585795469415" />
+    <state x="165" y="26" width="947" height="737" key="SettingsEditor" timestamp="1588009406204">
+      <screen x="56" y="26" width="1310" height="742" />
+    </state>
+    <state x="165" y="26" width="947" height="737" key="SettingsEditor/56.26.1310.742@56.26.1310.742" timestamp="1588009406204" />
     <state x="0" y="27" width="618" height="741" key="find.popup" timestamp="1587789347522">
       <screen x="70" y="27" width="1296" height="741" />
     </state>
