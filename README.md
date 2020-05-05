@@ -240,5 +240,12 @@ Today we:
 
 ## 04/05/2020
 
-	*
+	* Learned how to manipulate lines with 'update', 'set', 'where' and 'limit' commands
+	* Learned how to delete a line from a table and how to truncate all data
+	* Learned how to make a backup of a db or a table and save a dump
+	* Learned how to import dumps and recover lost data
+
+## 05/05/2020
+
+	* 
 
